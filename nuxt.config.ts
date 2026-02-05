@@ -14,14 +14,16 @@ export default defineNuxtConfig({
 
   // Nuxt 4.3 Route Rules - Centralized Layout Management
   routeRules: {
-    // Default layout for all main pages
-    '/': { appLayout: 'default' },
-    '/projects': { appLayout: 'default' },
-    '/tasks': { appLayout: 'default' },
-    '/messages': { appLayout: 'default' },
-    '/calendar': { appLayout: 'default' },
-    '/settings': { appLayout: 'default' },
-    '/profile': { appLayout: 'default' },
+    // Launcher (Home page)
+    '/': { appLayout: 'launcher' },
+    
+    // Project Management program
+    '/project-management': { appLayout: 'project' },
+    '/project-management/**': { appLayout: 'project' },
+    
+    // FinlerMeet program (Video Call)
+    '/finlermeet': { appLayout: 'finlermeet' },
+    '/finlermeet/**': { appLayout: 'finlermeet' },
     
     // Blank layout for auth pages (if created later)
     '/login': { appLayout: 'blank' },
