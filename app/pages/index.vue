@@ -1,70 +1,130 @@
 <template>
-  <div class="launcher-container">
+  <div class="min-h-screen relative overflow-hidden">
     <!-- Background gradient -->
-    <div class="launcher-bg"></div>
+    <div
+      class="absolute inset-0 bg-[linear-gradient(135deg,#0f0f23_0%,#1a1a3e_25%,#2d1b4e_50%,#1a2a4a_75%,#0f0f23_100%)] z-0"
+    >
+      <div
+        class="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(120,119,198,0.3)_0%,transparent_50%),radial-gradient(circle_at_80%_20%,rgba(255,119,198,0.2)_0%,transparent_50%),radial-gradient(circle_at_40%_40%,rgba(100,200,255,0.15)_0%,transparent_40%)] animate-pulse"
+      ></div>
+    </div>
 
     <!-- Content -->
-    <div class="launcher-content">
+    <div
+      class="relative z-10 min-h-screen flex flex-col items-center justify-center p-8"
+    >
       <!-- Logo & Title -->
-      <div class="launcher-header">
-        <div class="logo-container">
-          <Sparkles class="logo-icon" />
+      <div class="text-center mb-12">
+        <div
+          class="inline-flex items-center justify-center w-20 h-20 bg-linear-to-br from-indigo-500 to-purple-600 rounded-3xl mb-6 shadow-[0_20px_40px_rgba(99,102,241,0.4)] animate-bounce"
+        >
+          <Sparkles class="w-10 h-10 text-white" />
         </div>
-        <h1 class="launcher-title">Vibe Workspace</h1>
-        <p class="launcher-subtitle">เลือกโปรแกรมที่คุณต้องการใช้งาน</p>
+        <h1
+          class="text-5xl md:text-6xl font-extrabold bg-linear-to-r from-white via-indigo-200 to-indigo-300 bg-clip-text text-transparent mb-2"
+        >
+          Vibe Workspace
+        </h1>
+        <p class="text-lg text-white/60">เลือกโปรแกรมที่คุณต้องการใช้งาน</p>
       </div>
 
       <!-- App Cards -->
-      <div class="apps-grid">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[900px] w-full">
         <!-- Project Management Card -->
-        <NuxtLink to="/project-management" class="app-card project-card">
-          <div class="app-card-glow project-glow"></div>
-          <div class="app-card-content">
-            <div class="app-icon-wrapper project-icon-bg">
-              <FolderKanban class="app-icon" />
+        <NuxtLink
+          to="/project-management"
+          class="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 no-underline overflow-hidden transition-all duration-400 ease-out hover:-translate-y-2 hover:scale-[1.02] hover:border-white/20"
+        >
+          <!-- Glow Effect -->
+          <div
+            class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.3)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
+          ></div>
+
+          <div class="relative z-10">
+            <div
+              class="w-16 h-16 rounded-2xl bg-linear-to-br from-indigo-500 to-violet-500 shadow-[0_10px_30px_rgba(99,102,241,0.4)] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300"
+            >
+              <FolderKanban class="w-8 h-8 text-white" />
             </div>
-            <h2 class="app-title">Project Management</h2>
-            <p class="app-description">
+            <h2 class="text-2xl font-bold text-white mb-3">
+              Project Management
+            </h2>
+            <p class="text-[0.95rem] text-white/60 leading-relaxed mb-5">
               จัดการโปรเจค, Tasks, ติดตามความคืบหน้า และทำงานร่วมกับทีม
             </p>
-            <div class="app-features">
-              <span class="feature-tag">📁 Projects</span>
-              <span class="feature-tag">✅ Tasks</span>
-              <span class="feature-tag">📅 Calendar</span>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span
+                class="text-sm px-3 py-1.5 bg-white/10 rounded-full text-white/80"
+                >📁 Projects</span
+              >
+              <span
+                class="text-sm px-3 py-1.5 bg-white/10 rounded-full text-white/80"
+                >✅ Tasks</span
+              >
+              <span
+                class="text-sm px-3 py-1.5 bg-white/10 rounded-full text-white/80"
+                >📅 Calendar</span
+              >
             </div>
-            <div class="app-enter">
+            <div
+              class="flex items-center gap-2 font-semibold text-white opacity-80 group-hover:opacity-100 group-hover:gap-3 transition-all duration-300"
+            >
               <span>เข้าใช้งาน</span>
-              <ArrowRight class="arrow-icon" />
+              <ArrowRight
+                class="w-[18px] h-[18px] group-hover:translate-x-1 transition-transform duration-300"
+              />
             </div>
           </div>
         </NuxtLink>
 
         <!-- FinlerMeet Card -->
-        <NuxtLink to="/finlermeet" class="app-card meet-card">
-          <div class="app-card-glow meet-glow"></div>
-          <div class="app-card-content">
-            <div class="app-icon-wrapper meet-icon-bg">
-              <Video class="app-icon" />
+        <NuxtLink
+          to="/finlermeet"
+          class="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 no-underline overflow-hidden transition-all duration-400 ease-out hover:-translate-y-2 hover:scale-[1.02] hover:border-white/20"
+        >
+          <!-- Glow Effect -->
+          <div
+            class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.3)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
+          ></div>
+
+          <div class="relative z-10">
+            <div
+              class="w-16 h-16 rounded-2xl bg-linear-to-br from-emerald-500 to-emerald-600 shadow-[0_10px_30px_rgba(16,185,129,0.4)] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300"
+            >
+              <Video class="w-8 h-8 text-white" />
             </div>
-            <h2 class="app-title">FinlerMeet</h2>
-            <p class="app-description">
+            <h2 class="text-2xl font-bold text-white mb-3">FinlerMeet</h2>
+            <p class="text-[0.95rem] text-white/60 leading-relaxed mb-5">
               Video Call Meeting ที่ง่ายและรวดเร็ว พร้อม Chat และ Screen Share
             </p>
-            <div class="app-features">
-              <span class="feature-tag">📹 Video Call</span>
-              <span class="feature-tag">💬 Chat</span>
-              <span class="feature-tag">🖥️ Screen Share</span>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span
+                class="text-sm px-3 py-1.5 bg-white/10 rounded-full text-white/80"
+                >📹 Video Call</span
+              >
+              <span
+                class="text-sm px-3 py-1.5 bg-white/10 rounded-full text-white/80"
+                >💬 Chat</span
+              >
+              <span
+                class="text-sm px-3 py-1.5 bg-white/10 rounded-full text-white/80"
+                >🖥️ Screen Share</span
+              >
             </div>
-            <div class="app-enter">
+            <div
+              class="flex items-center gap-2 font-semibold text-white opacity-80 group-hover:opacity-100 group-hover:gap-3 transition-all duration-300"
+            >
               <span>เข้าใช้งาน</span>
-              <ArrowRight class="arrow-icon" />
+              <ArrowRight
+                class="w-[18px] h-[18px] group-hover:translate-x-1 transition-transform duration-300"
+              />
             </div>
           </div>
         </NuxtLink>
       </div>
 
       <!-- Footer -->
-      <div class="launcher-footer">
+      <div class="mt-12 text-center text-white/40 text-sm">
         <p>© 2026 Vibe Workspace. All rights reserved.</p>
       </div>
     </div>
@@ -78,278 +138,3 @@ definePageMeta({
   layout: "launcher",
 });
 </script>
-
-<style scoped>
-.launcher-container {
-  min-height: 100vh;
-  position: relative;
-  overflow: hidden;
-}
-
-.launcher-bg {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg,
-    #0f0f23 0%,
-    #1a1a3e 25%,
-    #2d1b4e 50%,
-    #1a2a4a 75%,
-    #0f0f23 100%
-  );
-  z-index: 0;
-}
-
-.launcher-bg::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(
-      circle at 20% 80%,
-      rgba(120, 119, 198, 0.3) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 80% 20%,
-      rgba(255, 119, 198, 0.2) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 40% 40%,
-      rgba(100, 200, 255, 0.15) 0%,
-      transparent 40%
-    );
-  animation: bgPulse 8s ease-in-out infinite;
-}
-
-@keyframes bgPulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
-}
-
-.launcher-content {
-  position: relative;
-  z-index: 1;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-}
-
-.launcher-header {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.logo-container {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 80px;
-  height: 80px;
-  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-  border-radius: 24px;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 20px 40px rgba(99, 102, 241, 0.4);
-  animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.logo-icon {
-  width: 40px;
-  height: 40px;
-  color: white;
-}
-
-.launcher-title {
-  font-size: 3rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, #fff 0%, #c7d2fe 50%, #a5b4fc 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 0.5rem;
-}
-
-.launcher-subtitle {
-  font-size: 1.125rem;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.apps-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-  max-width: 900px;
-  width: 100%;
-}
-
-@media (max-width: 768px) {
-  .apps-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .launcher-title {
-    font-size: 2rem;
-  }
-}
-
-.app-card {
-  position: relative;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 24px;
-  padding: 2rem;
-  text-decoration: none;
-  overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.app-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
-.app-card-glow {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-}
-
-.app-card:hover .app-card-glow {
-  opacity: 1;
-}
-
-.project-glow {
-  background: radial-gradient(
-    circle at center,
-    rgba(99, 102, 241, 0.3) 0%,
-    transparent 70%
-  );
-}
-
-.meet-glow {
-  background: radial-gradient(
-    circle at center,
-    rgba(16, 185, 129, 0.3) 0%,
-    transparent 70%
-  );
-}
-
-.app-card-content {
-  position: relative;
-  z-index: 1;
-}
-
-.app-icon-wrapper {
-  width: 64px;
-  height: 64px;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.5rem;
-  transition: transform 0.3s ease;
-}
-
-.app-card:hover .app-icon-wrapper {
-  transform: scale(1.1);
-}
-
-.project-icon-bg {
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
-}
-
-.meet-icon-bg {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
-}
-
-.app-icon {
-  width: 32px;
-  height: 32px;
-  color: white;
-}
-
-.app-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: white;
-  margin-bottom: 0.75rem;
-}
-
-.app-description {
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.6);
-  line-height: 1.6;
-  margin-bottom: 1.25rem;
-}
-
-.app-features {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.feature-tag {
-  font-size: 0.8rem;
-  padding: 0.35rem 0.75rem;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.app-enter {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 600;
-  color: white;
-  opacity: 0.8;
-  transition: all 0.3s ease;
-}
-
-.app-card:hover .app-enter {
-  opacity: 1;
-  gap: 0.75rem;
-}
-
-.arrow-icon {
-  width: 18px;
-  height: 18px;
-  transition: transform 0.3s ease;
-}
-
-.app-card:hover .arrow-icon {
-  transform: translateX(4px);
-}
-
-.launcher-footer {
-  margin-top: 3rem;
-  text-align: center;
-  color: rgba(255, 255, 255, 0.4);
-  font-size: 0.875rem;
-}
-</style>
