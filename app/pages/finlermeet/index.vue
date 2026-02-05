@@ -9,9 +9,9 @@
     <!-- Quick Actions -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
       <!-- New Meeting -->
-      <NuxtLink
-        to="/finlermeet/call"
-        class="group bg-linear-to-br from-emerald-500 to-teal-600 rounded-2xl p-8 hover:scale-[1.02] transition-transform cursor-pointer"
+      <button
+        @click="startNewMeeting"
+        class="group bg-linear-to-br from-emerald-500 to-teal-600 rounded-2xl p-8 hover:scale-[1.02] transition-transform cursor-pointer text-left"
       >
         <div class="flex items-center gap-4 mb-4">
           <div
@@ -32,7 +32,7 @@
             class="w-4 h-4 group-hover:translate-x-1 transition-transform"
           />
         </div>
-      </NuxtLink>
+      </button>
 
       <!-- Join Meeting -->
       <div class="bg-gray-800 rounded-2xl p-8 border border-gray-700">
@@ -47,7 +47,7 @@
             <p class="text-gray-400">เข้าร่วม Meeting ด้วย Code</p>
           </div>
         </div>
-        <div class="flex gap-2">
+        <form @submit.prevent="joinMeeting" class="flex gap-2">
           <input
             v-model="meetingCode"
             type="text"
@@ -55,11 +55,13 @@
             class="flex-1 px-4 py-3 bg-gray-700 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-emerald-500 transition-colors"
           />
           <button
-            class="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 rounded-xl font-medium transition-colors"
+            type="submit"
+            :disabled="!meetingCode.trim()"
+            class="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 disabled:bg-gray-600 disabled:cursor-not-allowed rounded-xl font-medium transition-colors"
           >
             เข้าร่วม
           </button>
-        </div>
+        </form>
       </div>
     </div>
 
@@ -93,12 +95,19 @@
               </div>
             </div>
           </div>
-          <NuxtLink
-            to="/finlermeet/call"
-            class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded-xl font-medium transition-colors"
-          >
-            เข้าร่วม
-          </NuxtLink>
+          <div class="flex items-center gap-3">
+            <span
+              class="text-sm text-gray-400 font-mono bg-gray-700 px-3 py-1 rounded-lg"
+            >
+              {{ meeting.roomCode }}
+            </span>
+            <button
+              @click="joinRoom(meeting.roomCode)"
+              class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded-xl font-medium transition-colors"
+            >
+              เข้าร่วม
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -110,6 +119,7 @@
         <div
           v-for="meeting in recentMeetings"
           :key="meeting.id"
+          @click="joinRoom(meeting.roomCode)"
           class="bg-gray-800 border border-gray-700 rounded-2xl p-5 hover:border-gray-600 transition-colors cursor-pointer"
         >
           <div class="flex items-center gap-3 mb-3">
@@ -127,7 +137,9 @@
           </div>
           <div class="flex items-center justify-between text-sm text-gray-400">
             <span>{{ meeting.duration }}</span>
-            <span>{{ meeting.participants }} คน</span>
+            <span class="font-mono bg-gray-700 px-2 py-0.5 rounded text-xs">{{
+              meeting.roomCode
+            }}</span>
           </div>
         </div>
       </div>
@@ -144,9 +156,58 @@ import {
   Users,
   ArrowRight,
 } from "lucide-vue-next";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import { preloadJitsiScript } from "~/composables/jitsi";
 
+// Preload Jitsi script when user visits index page
+onMounted(() => {
+  preloadJitsiScript();
+});
+
+const router = useRouter();
 const meetingCode = ref("");
+
+/**
+ * Generate a unique room code
+ */
+const generateRoomCode = (): string => {
+  const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
+  const segments = [];
+  for (let i = 0; i < 3; i++) {
+    let segment = "";
+    for (let j = 0; j < 4; j++) {
+      segment += characters.charAt(
+        Math.floor(Math.random() * characters.length),
+      );
+    }
+    segments.push(segment);
+  }
+  return segments.join("-");
+};
+
+/**
+ * Start a new meeting with a generated room code
+ */
+const startNewMeeting = () => {
+  const roomCode = generateRoomCode();
+  router.push(`/finlermeet/call?room=${roomCode}`);
+};
+
+/**
+ * Join an existing meeting with the entered code
+ */
+const joinMeeting = () => {
+  if (meetingCode.value.trim()) {
+    router.push(`/finlermeet/call?room=${meetingCode.value.trim()}`);
+  }
+};
+
+/**
+ * Join a specific room by code
+ */
+const joinRoom = (roomCode: string) => {
+  router.push(`/finlermeet/call?room=${roomCode}`);
+};
 
 const upcomingMeetings = [
   {
@@ -155,6 +216,7 @@ const upcomingMeetings = [
     time: "วันนี้ 10:00 น.",
     participants: 8,
     color: "bg-emerald-600",
+    roomCode: "team-standup-001",
   },
   {
     id: 2,
@@ -162,6 +224,7 @@ const upcomingMeetings = [
     time: "วันนี้ 14:00 น.",
     participants: 5,
     color: "bg-blue-600",
+    roomCode: "project-review-002",
   },
   {
     id: 3,
@@ -169,6 +232,7 @@ const upcomingMeetings = [
     time: "พรุ่งนี้ 09:00 น.",
     participants: 12,
     color: "bg-purple-600",
+    roomCode: "client-pres-003",
   },
 ];
 
@@ -179,6 +243,7 @@ const recentMeetings = [
     date: "เมื่อวาน",
     duration: "1 ชม. 30 นาที",
     participants: 6,
+    roomCode: "sprint-plan-001",
   },
   {
     id: 2,
@@ -186,6 +251,7 @@ const recentMeetings = [
     date: "3 วันที่แล้ว",
     duration: "45 นาที",
     participants: 4,
+    roomCode: "design-rev-002",
   },
   {
     id: 3,
@@ -193,6 +259,7 @@ const recentMeetings = [
     date: "1 สัปดาห์ที่แล้ว",
     duration: "2 ชม.",
     participants: 15,
+    roomCode: "training-003",
   },
 ];
 </script>
