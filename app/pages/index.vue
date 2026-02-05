@@ -15,11 +15,11 @@
     >
       <!-- Logo & Title -->
       <div class="text-center mb-12">
-        <div
+        <!-- <div
           class="inline-flex items-center justify-center w-20 h-20 bg-linear-to-br from-indigo-500 to-purple-600 rounded-3xl mb-6 shadow-[0_20px_40px_rgba(99,102,241,0.4)] animate-bounce"
         >
           <Sparkles class="w-10 h-10 text-white" />
-        </div>
+        </div> -->
         <h1
           class="text-5xl md:text-6xl font-extrabold bg-linear-to-r from-white via-indigo-200 to-indigo-300 bg-clip-text text-transparent mb-2"
         >
